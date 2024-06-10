@@ -7,10 +7,6 @@ on:
       - develop
   pull_request:
 
-env:
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-
 jobs:
   test-backend:
     runs-on: ubuntu-22.04
@@ -42,11 +38,16 @@ jobs:
 
       - name: Login to DockerHub
         shell: bash
+        env:
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_TOKEN"
 
       - name: Build image and push backend
         uses: docker/build-push-action@v3
-        shell: bash
+        env:
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         with:
           # relative path to the place where source code with Dockerfile is located
           context: ./simple-api
@@ -55,18 +56,22 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push database
-        shell: bash
         # DO the same for database
         uses: docker/build-push-action@v3
+        env:
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         with:
           context: ./database
           tags: "$DOCKERHUB_USERNAME"/tp-devops-database:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push httpd
-        shell: bash
         # DO the same for httpd
         uses: docker/build-push-action@v3
+        env:
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         with:
           context: ./httpd
           tags: "$DOCKERHUB_USERNAME"/tp-devops-httpd:latest
