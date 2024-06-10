@@ -19,7 +19,8 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
+          distribution: openjdk
 
       #finally build your app with the latest command
       - name: Build and test with Maven
-        run: mvn clean verify
+        run: mvn clean verify --file ./simple-api/
