@@ -21,3 +21,6 @@ This project contains three services:
 - **Backend Service:** This service manages the backend logic of the application. Built using Spring Boot and Java, it handles API requests and interacts with the database.
 - **Database Service:** Responsible for database operations, this service utilizes the PostgreSQL relational database.
 - **Reverse Proxy Service:** This service routes requests to the appropriate service and is implemented using Apache Server.
+
+
+# other 
