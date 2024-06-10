@@ -38,7 +38,7 @@ jobs:
 
       - name: Login to DockerHub
         shell: bash
-        with:
+        env:
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_TOKEN"
