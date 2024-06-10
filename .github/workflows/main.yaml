@@ -46,6 +46,7 @@ jobs:
 
       - name: Build image and push backend
         uses: docker/build-push-action@v3
+        shell: bash
         with:
           # relative path to the place where source code with Dockerfile is located
           context: ./simple-api
@@ -54,6 +55,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push database
+        shell: bash
         # DO the same for database
         uses: docker/build-push-action@v3
         with:
@@ -62,6 +64,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push httpd
+        shell: bash
         # DO the same for httpd
         uses: docker/build-push-action@v3
         with:
