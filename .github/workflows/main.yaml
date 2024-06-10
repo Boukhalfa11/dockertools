@@ -45,35 +45,26 @@ jobs:
 
       - name: Build image and push backend
         uses: docker/build-push-action@v3
-        env:
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         with:
           # relative path to the place where source code with Dockerfile is located
           context: ./simple-api
           # Note: tags has to be all lower-case
-          tags: "$DOCKERHUB_USERNAME"/tp-devops-simple-api:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-simple-api:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push database
         # DO the same for database
         uses: docker/build-push-action@v3
-        env:
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         with:
           context: ./database
-          tags: "$DOCKERHUB_USERNAME"/tp-devops-database:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-database:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push httpd
         # DO the same for httpd
         uses: docker/build-push-action@v3
-        env:
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         with:
           context: ./httpd
-          tags: "$DOCKERHUB_USERNAME"/tp-devops-httpd:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-httpd:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
