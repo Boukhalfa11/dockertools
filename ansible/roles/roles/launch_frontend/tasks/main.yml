@@ -1,0 +1,12 @@
+---
+# tasks file for roles/launch_frontend
+- name: launch launch_frontend
+  docker_container:
+    name: frontend
+    image: bhamitouche/tp-devops-frontend
+    networks:
+      - name: app-network
+    ports:
+      - 7000:80
+  vars:
+    ansible_python_interpreter: /usr/bin/python3

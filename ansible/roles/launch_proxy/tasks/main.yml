@@ -1,0 +1,12 @@
+---
+# tasks file for roles/launch_proxy
+- name: launch proxy
+  docker_container:
+    name: proxy
+    image: bhamitouche/tp-devops-httpd
+    networks:
+      - name: app-network
+    ports:
+      - 80:80
+  vars:
+    ansible_python_interpreter: /usr/bin/python3

@@ -1,0 +1,12 @@
+---
+# tasks file for roles/launch_database
+- name: launch database
+  docker_container:
+    name: database
+    image: bhamitouche/tp-devops-database
+    networks:
+      - name: app-network
+    ports:
+      - 5432:5432
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
